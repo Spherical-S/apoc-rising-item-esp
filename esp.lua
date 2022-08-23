@@ -148,6 +148,9 @@ RunService = game:GetService("RunService")
 uKey = Enum.KeyCode.U
 iKey = Enum.KeyCode.I
 oKey = Enum.KeyCode.O
+jKey = Enum.KeyCode.J
+kKey = Enum.KeyCode.K
+lKey = Enum.KeyCode.L
 player = game:GetService("Players").LocalPlayer
 typing = false
 wEspOn = true
@@ -167,14 +170,23 @@ uIS.TextBoxFocusReleased:Connect(function()
 end)
 
 uIS.InputBegan:Connect(function(Input)
-    if Input.KeyCode == iKey and typing == false then
+    if Input.KeyCode == uKey and typing == false then
         wEspOn = not wEspOn
     end
-    if Input.KeyCode == oKey and typing == false then
+    if Input.KeyCode == iKey and typing == false then
         aEspOn = not aEspOn
     end
-    if Input.KeyCode == uKey and typing == false then
+    if Input.KeyCode == oKey and typing == false then
         vEspOn = not vEspOn
+    end
+    if Input.KeyCode == jKey and typing == false then
+        createWESP()
+    end
+    if Input.KeyCode == kKey and typing == false then
+        createAESP()
+    end
+    if Input.KeyCode == lKey and typing == false then
+        createVESP()
     end
 end)
 
