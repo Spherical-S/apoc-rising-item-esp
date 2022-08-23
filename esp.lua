@@ -172,15 +172,19 @@ end)
 uIS.InputBegan:Connect(function(Input)
     if Input.KeyCode == uKey and typing == false then
         wEspOn = not wEspOn
+        print('Pressed u (turn off weapon ESP)')
     end
     if Input.KeyCode == iKey and typing == false then
         aEspOn = not aEspOn
+        print('Pressed i (turn off ammo ESP)')
     end
     if Input.KeyCode == oKey and typing == false then
         vEspOn = not vEspOn
+        print('Pressed o (turn off vehicle ESP)')
     end
     if Input.KeyCode == lKey and typing == false then
         clearESP()
+        print('Pressed l (refresh ESP)')
         createVESP()
         createWESP()
         createAESP()
