@@ -24,6 +24,29 @@ function getAmmo()
 end
 
 
+function createWESP()
+    if wEspOn then
+        local opacity = 0.9
+    end
+    if not wEspOn then
+        local opacity = 1
+    end
+    print("Set opacity")
+    for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
+        if weapons[v.Name] then
+            print("found match")
+            local box = v.Parent.Name
+            box = game.Workspace.Map.Shared.LootBins.box
+            box = box:FindFirstChild("Group")
+            box = box:FindFirstChild("Part")
+            print("Found box")
+            local dist = math.ceil((player:DistanceFromCharacter(box.Position)))
+            print(dist)
+        end
+    end
+end
+
+
 uIS = game:GetService("UserInputService")
 RunService = game:GetService("RunService")
 uKey = Enum.KeyCode.U
@@ -67,6 +90,16 @@ end)
 print('Done initializing')
 
 local success, response = pcall(
-    createESP()
+    createWESP()
 )
-print('ESP loaded!')
+print('weapon ESP loaded!')
+
+-- local success, response = pcall(
+--     createAESP()
+-- )
+-- print('ammo ESP loaded!')
+--
+-- local success, response = pcall(
+--     createVESP()
+-- )
+-- print('vehicle ESP loaded!')
