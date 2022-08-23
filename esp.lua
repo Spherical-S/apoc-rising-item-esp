@@ -35,8 +35,7 @@ function createWESP()
     for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
         if weapons[v.Name] then
             print("found match")
-            local box = v.Name
-            print(box)
+            print(v.Name)
             box = game.Workspace.Map.Shared.LootBins.box
             print("found box in workspace")
             box = box:FindFirstChild("Group")
