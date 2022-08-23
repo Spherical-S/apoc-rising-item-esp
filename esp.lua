@@ -34,16 +34,19 @@ function createWESP()
     print("Set opacity")
     for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
         if weapons[v.Name] then
-            print("found matc")
-            print(v.Parent)
-            box = game.Workspace.Map.Shared.LootBins.box
-            print("found box in workspace")
-            box = box:FindFirstChild("Group")
-            print("found group")
-            box = box:FindFirstChild("Part")
-            print("Found box part")
-            local dist = math.ceil((player:DistanceFromCharacter(box.Position)))
-            print(dist)
+            local boxName = v.Parent.Name
+            local boxs = game.Workspace.Map.Shared.LootBins
+            print("found all boxes")
+            local box = boxs:FindFirstChild(boxName)
+            if box then
+                print("found ".. boxName.." in boxes")
+                local part = box:FindFirstChild("Part")
+                print("Found box part")
+                local dist = math.ceil((player:DistanceFromCharacter(box.Position)))
+                print(dist)
+            else
+                print("Couldnt find".. boxName .. "in boxes")
+            end
         end
     end
 end
