@@ -4,6 +4,11 @@ function clearESP()
             v:Destroy()
         end
     end
+    for i,v in pairs(game.Workspace.Vehicles.Spawned:GetDescendants()) do
+        if v.Name == 'BillboardGui' then
+            v:Destroy()
+        end
+    end
 end
 
 
@@ -25,29 +30,115 @@ end
 
 
 function createWESP()
+    local opacity = 0
+    local size = 0
     if wEspOn then
-        local opacity = 0.9
+        opacity = 0.6
+        size = 0.5
     end
     if not wEspOn then
-        local opacity = 1
+        opacity = 1
+        size = 0
     end
-    print("Set opacity")
     for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
         if weapons[v.Name] then
+            local weaponName = v.Name
             local boxName = v.Parent.Name
             local boxs = game.Workspace.Map.Shared.LootBins
-            print("found all boxes")
             local box = boxs:FindFirstChild(boxName)
             if box then
-                print("found ".. boxName.." in boxes")
-                local part = box:FindFirstChild("Part")
-                print("Found box part")
-                local dist = math.ceil((player:DistanceFromCharacter(box.Position)))
-                print(dist)
-            else
-                print("Couldnt find".. boxName .. "in boxes")
+                local group = box:FindFirstChild("Group")
+                local part = group:FindFirstChild("Part")
+                local dist = math.ceil((player:DistanceFromCharacter(part.Position)))
+                local gui = Instance.new('BillboardGui')
+                local TextLabel = Instance.new('TextLabel')
+
+                gui.Parent = part
+                gui.AlwaysOnTop = true
+                gui.Size = UDim2.new(0,200,0,50)
+                gui.StudsOffset = Vector3.new(0,2,0)
+                TextLabel.Parent = gui
+                TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+                TextLabel.BackgroundTransparency = opacity
+                TextLabel.Size = UDim2.new(size, 0, size, 0)
+                TextLabel.Text = weaponName .. " ("..dist..")"
+                TextLabel.TextColor3 = Color3.new(0, 0, 0)
+                TextLabel.TextScaled = true
             end
         end
+    end
+end
+
+
+function createAESP()
+    local opacity = 0
+    local size = 0
+    if aEspOn then
+        opacity = 0.6
+        size = 0.5
+    end
+    if not aEspOn then
+        opacity = 1
+        size = 0
+    end
+    for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
+        if ammo[v.Name] then
+            local ammoName = v.Name
+            local boxName = v.Parent.Name
+            local boxs = game.Workspace.Map.Shared.LootBins
+            local box = boxs:FindFirstChild(boxName)
+            if box then
+                local group = box:FindFirstChild("Group")
+                local part = group:FindFirstChild("Part")
+                local dist = math.ceil((player:DistanceFromCharacter(part.Position)))
+                local gui = Instance.new('BillboardGui')
+                local TextLabel = Instance.new('TextLabel')
+
+                gui.Parent = part
+                gui.AlwaysOnTop = true
+                gui.Size = UDim2.new(0,200,0,50)
+                gui.StudsOffset = Vector3.new(0,2,0)
+                TextLabel.Parent = gui
+                TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+                TextLabel.BackgroundTransparency = opacity
+                TextLabel.Size = UDim2.new(size, 0, size, 0)
+                TextLabel.Text = ammoName .. " ("..dist..")"
+                TextLabel.TextColor3 = Color3.new(0, 0, 0)
+                TextLabel.TextScaled = true
+            end
+        end
+    end
+end
+
+
+function createVESP()
+    local opacity = 0
+    local size = 0
+    if vEspOn then
+        opacity = 0.6
+        size = 0.5
+    end
+    if not vEspOn then
+        opacity = 1
+        size = 0
+    end
+    for i,v in pairs(game.Workspace.Vehicles.Spawned:GetChildren()) do
+        local carName = v.Name
+        local dist = math.ceil((player:DistanceFromCharacter(v.Base.Position)))
+        local gui = Instance.new('BillboardGui')
+        local TextLabel = Instance.new('TextLabel')
+
+        gui.Parent = v.Base
+        gui.AlwaysOnTop = true
+        gui.Size = UDim2.new(0,200,0,50)
+        gui.StudsOffset = Vector3.new(0,2,0)
+        TextLabel.Parent = gui
+        TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+        TextLabel.BackgroundTransparency = opacity
+        TextLabel.Size = UDim2.new(size, 0, size, 0)
+        TextLabel.Text = carName .. " ("..dist..")"
+        TextLabel.TextColor3 = Color3.new(0, 0, 0)
+        TextLabel.TextScaled = true
     end
 end
 
@@ -66,11 +157,6 @@ weapons = getWeapons()
 ammo = getAmmo()
 
 clearESP()
--- for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
---     if weapons[v.Name] or ammo[v.Name] then
---         print(v.Name)
---     end
--- end
 
 uIS.TextBoxFocused:Connect(function()
     typing = true
@@ -94,17 +180,7 @@ end)
 
 print('Done initializing')
 
-local success, response = pcall(
-    createWESP()
-)
-print('weapon ESP loaded!')
 
--- local success, response = pcall(
---     createAESP()
--- )
--- print('ammo ESP loaded!')
---
--- local success, response = pcall(
---     createVESP()
--- )
--- print('vehicle ESP loaded!')
+createAESP()
+createWESP()
+createVESP()
