@@ -122,6 +122,9 @@ function createVESP()
         opacity = 1
         size = 0
     end
+    print(opacity)
+    print(size)
+    print(vEspOn)
     for i,v in pairs(game.Workspace.Vehicles.Spawned:GetChildren()) do
         local carName = v.Name
         local dist = math.ceil((player:DistanceFromCharacter(v.Base.Position)))
@@ -172,15 +175,16 @@ end)
 uIS.InputBegan:Connect(function(Input)
     if Input.KeyCode == uKey and typing == false then
         wEspOn = not wEspOn
-        print('Pressed u (turn off weapon ESP)')
+        print('Pressed u (toggle weapon ESP)')
     end
     if Input.KeyCode == iKey and typing == false then
         aEspOn = not aEspOn
-        print('Pressed i (turn off ammo ESP)')
+        print('Pressed i (toggle ammo ESP)')
     end
     if Input.KeyCode == oKey and typing == false then
         vEspOn = not vEspOn
-        print('Pressed o (turn off vehicle ESP)')
+        print('Pressed o (toggle vehicle ESP)')
+        print(vEspOn)
     end
     if Input.KeyCode == lKey and typing == false then
         clearESP()
@@ -188,6 +192,10 @@ uIS.InputBegan:Connect(function(Input)
         createVESP()
         createWESP()
         createAESP()
+    end
+    if Input.KeyCode == jKey and typing == false then
+        print('Pressed j (destroy all esp)')
+        clearESP()
     end
 end)
 
