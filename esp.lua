@@ -34,7 +34,7 @@ function createWESP()
     print("Set opacity")
     for i,v in pairs(game.Workspace.Loot:GetDescendants()) do
         if weapons[v.Name] then
-            print("found match")
+            print("found matc")
             print(v.Parent)
             box = game.Workspace.Map.Shared.LootBins.box
             print("found box in workspace")
