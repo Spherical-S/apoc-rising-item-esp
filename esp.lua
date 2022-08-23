@@ -36,10 +36,13 @@ function createWESP()
         if weapons[v.Name] then
             print("found match")
             local box = v.Parent.Name
+            print(box)
             box = game.Workspace.Map.Shared.LootBins.box
+            print("found box in workspace")
             box = box:FindFirstChild("Group")
+            print("found group")
             box = box:FindFirstChild("Part")
-            print("Found box")
+            print("Found box part")
             local dist = math.ceil((player:DistanceFromCharacter(box.Position)))
             print(dist)
         end
