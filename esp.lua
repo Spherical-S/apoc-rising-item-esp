@@ -179,14 +179,11 @@ uIS.InputBegan:Connect(function(Input)
     if Input.KeyCode == oKey and typing == false then
         vEspOn = not vEspOn
     end
-    if Input.KeyCode == jKey and typing == false then
-        createWESP()
-    end
-    if Input.KeyCode == kKey and typing == false then
-        createAESP()
-    end
     if Input.KeyCode == lKey and typing == false then
+        clearESP()
         createVESP()
+        createWESP()
+        createAESP()
     end
 end)
 
