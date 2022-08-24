@@ -91,20 +91,22 @@ function createAESP()
                 local group = box:FindFirstChild("Group")
                 local part = group:FindFirstChild("Part")
                 local dist = math.ceil((player:DistanceFromCharacter(part.Position)))
-                local gui = Instance.new('BillboardGui')
-                local TextLabel = Instance.new('TextLabel')
+                if dist > 2000 then
+                    local gui = Instance.new('BillboardGui')
+                    local TextLabel = Instance.new('TextLabel')
 
-                gui.Parent = part
-                gui.AlwaysOnTop = true
-                gui.Size = UDim2.new(0,200,0,50)
-                gui.StudsOffset = Vector3.new(0,2,0)
-                TextLabel.Parent = gui
-                TextLabel.BackgroundColor3 = Color3.new(1,1,1)
-                TextLabel.BackgroundTransparency = opacity
-                TextLabel.Size = UDim2.new(size, 0, size, 0)
-                TextLabel.Text = ammoName .. " ("..dist..")"
-                TextLabel.TextColor3 = Color3.new(0, 0, 0)
-                TextLabel.TextScaled = true
+                    gui.Parent = part
+                    gui.AlwaysOnTop = true
+                    gui.Size = UDim2.new(0,200,0,50)
+                    gui.StudsOffset = Vector3.new(0,2,0)
+                    TextLabel.Parent = gui
+                    TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+                    TextLabel.BackgroundTransparency = opacity
+                    TextLabel.Size = UDim2.new(size, 0, size, 0)
+                    TextLabel.Text = ammoName .. " ("..dist..")"
+                    TextLabel.TextColor3 = Color3.new(0, 0, 0)
+                    TextLabel.TextScaled = true
+                end
             end
         end
     end
